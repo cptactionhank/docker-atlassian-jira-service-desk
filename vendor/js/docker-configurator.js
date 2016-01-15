@@ -12,7 +12,7 @@ app.filter('prefix', function () {
 
 app.run(function($rootScope) {
 
-  // configuration constants for the various Atlassian JIRA docker images
+  // configuration constants for the various Atlassian JIRA Service Desk docker images
   // where each key defines the most recent version that had that specific
   // configuration. For example the key 5.8.2 defines the most recent
   // image that supported that configuration and finding a configuration for
@@ -62,7 +62,7 @@ app.controller('ConfigurationController', function($rootScope, $scope, $http) {
   // populate the controllers model with the first 1000 available tags from
   // the Docker Hub repository.
   $http
-    .get('//crossorigin.me/https://hub.docker.com/v2/repositories/cptactionhank/atlassian-jira/tags/?page_size=1000')
+    .get('//crossorigin.me/https://hub.docker.com/v2/repositories/cptactionhank/atlassian-jira-service-desk/tags/?page_size=1000')
     .success(function(data, status) {
       $scope.tags = data.results.sort(function(a, b) {
         return String.naturalCompare(a.name, b.name);
