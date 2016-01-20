@@ -1,6 +1,6 @@
 # Atlassian JIRA Service Desk in a Docker container
 
-> Version 3.0.5
+> Version 3.0.9
 
 [![Build Status](https://img.shields.io/circleci/project/cptactionhank/docker-atlassian-jira-service-desk/master.svg)](https://circleci.com/gh/cptactionhank/docker-atlassian-jira-service-desk) [![Open Issues](https://img.shields.io/github/issues/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk) [![Stars on GitHub](https://img.shields.io/github/stars/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk) [![Forks on GitHub](https://img.shields.io/github/forks/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk) [![Stars on Docker Hub](https://img.shields.io/docker/stars/cptactionhank/atlassian-jira-service-desk.svg)](https://registry.hub.docker.com/u/cptactionhank/atlassian-jira-service-desk) [![Pulls on Docker Hub](https://img.shields.io/docker/pulls/cptactionhank/atlassian-jira-service-desk.svg)](https://registry.hub.docker.com/u/cptactionhank/atlassian-jira-service-desk)
 
@@ -17,7 +17,7 @@ Want to help out, check out the contribution section.
 
 To quickly get started with running a JIRA Service Desk instance, first run the following command:
 ```bash
-docker run --detach --publish 8080:8080 cptactionhank/atlassian-jira-service-desk:3.0.5
+docker run --detach --publish 8080:8080 cptactionhank/atlassian-jira-service-desk:3.0.9
 ```
 
 Then use your browser to navigate to `http://[dockerhost]:8080` and finish the configuration.
