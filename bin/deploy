@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Prepare Git committer information
-git config --global user.email "circleci@circleci"
-git config --global user.name "Circle CI Automated Builder"
+git config user.email "circleci@circleci"
+git config user.name "Circle CI Automated Builder"
 
 # Obtain the currently latest version of Atlassian JIRA version defined by the
 # Dockerfile in this repository.
@@ -24,7 +24,7 @@ else
 
 	# add changes made to current branch
 	git add --all
-	git commit --message "Updated Atlassian JIRA Software master branch to latest version ${VERSION}"
+	git commit --message "Updated Atlassian JIRA Service Desk master branch to latest version ${VERSION}"
 
 	# push changes made to current branch
 	git push origin master
@@ -64,7 +64,7 @@ else
 	echo "Committing changes"
 
 	git add --all
-	git commit --message "Created new Atlassian JIRA Software branch for version ${VERSION}"
+	git commit --message "Created new Atlassian JIRA Service Desk branch for version ${VERSION}"
 
 	# Acutally push the new branch to the origin repository (GitHub) such that
 	# the changes are published for the Docker Hub repository and everyone else.
