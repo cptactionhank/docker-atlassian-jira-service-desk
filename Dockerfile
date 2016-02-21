@@ -3,8 +3,8 @@ FROM java:8
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
 ENV JIRA_INSTALL  /opt/atlassian/jira
-ENV JIRA_VERSION  7.0.10
-ENV APP_VERSION   3.0.10
+ENV JIRA_VERSION  7.1.0
+ENV APP_VERSION   3.1.0
 
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
@@ -45,7 +45,7 @@ EXPOSE 8080
 VOLUME ["/var/atlassian/jira", "/opt/atlassian/jira"]
 
 # Set the default working directory as the installation directory.
-WORKDIR ${JIRA_HOME}
+WORKDIR /var/atlassian/jira
 
 COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
