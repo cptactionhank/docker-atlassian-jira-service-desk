@@ -1,4 +1,4 @@
-[![Travis CI Build Status](https://img.shields.io/travis/cptactionhank/docker-atlassian-jira-service-desk/master.svg?label=Travis%20CI)](https://travis-ci.org/cptactionhank/docker-atlassian-jira-service-desk/branches) [![CircleCI Build Status](https://img.shields.io/circleci/project/cptactionhank/docker-atlassian-jira-service-desk/master.svg?label=CircleCI)](https://circleci.com/gh/cptactionhank/docker-atlassian-jira-service-desk) [![Open Issues](https://img.shields.io/github/issues/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/issues) [![Stars on GitHub](https://img.shields.io/github/stars/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/stargazers) [![Forks on GitHub](https://img.shields.io/github/forks/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/network) [![Stars on Docker Hub](https://img.shields.io/docker/stars/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/) [![Pulls on Docker Hub](https://img.shields.io/docker/pulls/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/) [![Friends of cptactionhank](https://img.shields.io/badge/donation-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=maage@dotmaage.dk&item_name=Friends+of+cptactionhank&item_number=Open+Source+Donation)
+[![Travis CI Build Status](https://img.shields.io/travis/cptactionhank/docker-atlassian-jira-service-desk/master.svg?label=Travis%20CI)](https://travis-ci.org/cptactionhank/docker-atlassian-jira-service-desk/branches) [![CircleCI Build Status](https://img.shields.io/circleci/project/cptactionhank/docker-atlassian-jira-service-desk/master.svg?label=CircleCI)](https://circleci.com/gh/cptactionhank/docker-atlassian-jira-service-desk) [![Open Issues](https://img.shields.io/github/issues/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/issues) [![Stars on GitHub](https://img.shields.io/github/stars/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/stargazers) [![Forks on GitHub](https://img.shields.io/github/forks/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/network) [![Stars on Docker Hub](https://img.shields.io/docker/stars/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/) [![Pulls on Docker Hub](https://img.shields.io/docker/pulls/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/) [![Friends of cptactionhank](https://img.shields.io/badge/donation-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=maage@dotmaage.dk&item_name=Friends+of+cptactionhank&item_number=docker-atlassian-jira-service-desk)
 
 # Atlassian JIRA Service Desk in a Docker container
 
@@ -6,14 +6,14 @@ This is a containerized installation of Atlassian JIRA Service Desk with Docker,
 
 * [Atlassian JIRA Core](https://cptactionhank.github.io/docker-atlassian-jira)
 * [Atlassian JIRA Software](https://cptactionhank.github.io/docker-atlassian-jira-software)
-* [Atlassian JIRA ServiceDesk](https://cptactionhank.github.io/docker-atlassian-service-desk)
+* [Atlassian JIRA Service Desk](https://cptactionhank.github.io/docker-atlassian-service-desk)
 * [Atlassian Confluence](https://cptactionhank.github.io/docker-atlassian-confluence)
 
 If you want to help out, you can check out the contribution section further down.
 
 ## I'm in the fast lane! Get me started
 
-To quickly get started running a JIRA Software instance, use the following command:
+To quickly get started running a JIRA Service Desk instance, use the following command:
 ```bash
 docker run --detach --publish 8080:8080 cptactionhank/atlassian-jira-service-desk:latest
 ```
@@ -24,7 +24,7 @@ Then simply navigate your preferred browser to `http://[dockerhost]:8080` and fi
 
 This image has been created with the best intentions and an expert understanding of docker, but it should not be expected to be flawless. Should you be in the position to do so, I request that you help support this repository with best-practices and other additions.
 
-Travis CI and CircleCI has been configured to build the Dockerfile and run acceptance tests on the Atlassian JIRA Software image to ensure it is working.
+Travis CI and CircleCI has been configured to build the Dockerfile and run acceptance tests on the Atlassian JIRA Service Desk image to ensure it is working.
 
 Travis CI has additionally been configured to automatically deploy new version branches when successfully building a new version of Atlassian JIRA Service Desk in the `master` branch and serves as the base. Furthermore an `eap` branch has been setup to automatically build and commit updates to ensure this branch contains the latest version of Atlassian JIRA Service Desk Early Access Preview.
 
