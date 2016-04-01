@@ -1,8 +1,5 @@
-require 'timeout'
-require 'spec_helper'
-
-shared_examples 'using a postgresql database' do
-    before :all do
+shared_examples 'using a PostgreSQL database' do
+  before :all do
     within 'form#jira-setup-database' do
       # select using external database
       choose 'jira-setup-database-field-database-external'

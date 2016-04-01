@@ -1,7 +1,4 @@
-require 'timeout'
-require 'spec_helper'
-
-shared_examples 'using a mysql database' do
+shared_examples 'using a MySQL database' do
   before :all do
     within 'form#jira-setup-database' do
       # select using external database
