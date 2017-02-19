@@ -9,7 +9,8 @@ ENV APP_VERSION   3.3.1
 # directory structure.
 RUN set -x \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends libtcnative-1 xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
     && apt-get clean \
     && mkdir -p                "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
