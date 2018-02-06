@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8-alpine
 
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
@@ -8,10 +8,7 @@ ENV APP_VERSION   3.10.1
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 RUN set -x \
-    && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
-    && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
-    && apt-get clean \
+    && apk add --no-cache curl xmlstarlet bash \
     && mkdir -p                "${JIRA_HOME}" \
     && mkdir -p                "${JIRA_HOME}/caches/indexes" \
     && chmod -R 700            "${JIRA_HOME}" \
@@ -53,4 +50,4 @@ COPY "docker-entrypoint.sh" "/"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Run Atlassian JIRA as a foreground process by default.
-CMD ["/opt/atlassian/jira/bin/catalina.sh", "run"]
+CMD ["/opt/atlassian/jira/bin/start-jira.sh", "-fg"]

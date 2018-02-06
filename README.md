@@ -1,5 +1,7 @@
 [![CircleCI Build Status](https://img.shields.io/circleci/project/cptactionhank/docker-atlassian-jira-service-desk/master.svg?label=CircleCI)](https://circleci.com/gh/cptactionhank/docker-atlassian-jira-service-desk) [![Open Issues](https://img.shields.io/github/issues/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/issues) [![Stars on GitHub](https://img.shields.io/github/stars/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/stargazers) [![Forks on GitHub](https://img.shields.io/github/forks/cptactionhank/docker-atlassian-jira-service-desk.svg)](https://github.com/cptactionhank/docker-atlassian-jira-service-desk/network) [![Stars on Docker Hub](https://img.shields.io/docker/stars/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/) [![Pulls on Docker Hub](https://img.shields.io/docker/pulls/cptactionhank/atlassian-jira-service-desk.svg)](https://hub.docker.com/r/cptactionhank/atlassian-jira-service-desk/)
 
+> HEADS UP! The `latest` tag and versions above 3.10.1 will be switching to use Alpine versions of OpenJDK as the base image.
+
 # Atlassian JIRA Service Desk in a Docker container
 
 This is a containerized installation of Atlassian JIRA Service Desk with Docker, and it's a match made in heaven for us all to enjoy. The aim of this image is to keep the installation as straight forward as possible, but with a few Docker related twists. You can get started by clicking the appropriate link below and reading the documentation.
@@ -19,6 +21,17 @@ docker run --detach --publish 8080:8080 cptactionhank/atlassian-jira-service-des
 ```
 
 Then simply navigate your preferred browser to `http://[dockerhost]:8080` and finish the configuration.
+
+## Configuration
+
+You can configure a small set of things by supplying the following environment variables
+
+| Environment Variable   | Description |
+| ---------------------- | ----------- |
+| X_PROXY_NAME           | Sets the Tomcat Connectors `ProxyName` attribute |
+| X_PROXY_PORT           | Sets the Tomcat Connectors `ProxyPort` attribute |
+| X_PROXY_SCHEME         | If set to `https` the Tomcat Connectors `secure=true` and `redirectPort` equal to `X_PROXY_PORT`   |
+| X_PATH                 | Sets the Tomcat connectors `path` attribute |
 
 ## Contributions
 
