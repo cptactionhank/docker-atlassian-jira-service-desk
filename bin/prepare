@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Usage: bin/prepare [VERSION]
+#
+# Prepares the current directory according to the given Atlassian JIRA
+# VERSION. If no VERSION information is specified the latest version is
+# retrieved from the Atlassian JIRA download feed.
+
+if [[ "$(git rev-parse --abbrev-ref HEAD)" != "master" && -z "$1" ]]; then
+	echo "Not master branch and therefore nothing to prepare"
+	exit 0
+elif [[ -n "${1}" ]]; then
+	echo "Overriding latest Atlassian JIRA to ${1}"
+fi
+
+read -r URL APP_VERSION <<< "${*:-$(curl -Ls 'https://my.atlassian.com/download/feeds/current/jira-servicedesk.json' \
+	| sed 's/downloads(\(.*\))/\1/g' \
+	| jq -r '.[] | select(.description | test("TAR\\.GZ Archive")) | ("" + .zipUrl + " " + .version)')}"
+
+echo "Obtaining Altassian JIRA version information..."
+
+# Obtain the currently latest version of Atlassian JIRA version defined by the
+# Dockerfile in this repository.
+CURRENT_VERSION=$(sed -nr 's/ENV APP_VERSION[[:space:]]*(.+)/\1/p' Dockerfile)
+
+# Obtain the latest Atlassian JIRA version by going to the JSON version feed
+# information to get a JSONP formatted response, strip the output to retrieve
+# the actual content and then get the version number from the first entry.
+echo "Found versions:"
+echo "  Current: ${CURRENT_VERSION}"
+echo "   Latest: ${APP_VERSION}"
+echo ""
+
+echo "Preparing branch for version new Atlassian JIRA version"
+
+# Edit the `Dockerfile` by changing the current version to the new obtained
+# version from the Atlassian JIRA version feed.
+# sed --in-place \
+# 	--expression "s/ENV JIRA_VERSION  .*/ENV JIRA_VERSION  ${JIRA_VERSION}/g" \
+# 	--expression "s/ENV APP_VERSION   .*/ENV APP_VERSION   ${APP_VERSION}/g" \
+# 	Dockerfile
+
+# Edit the `Dockerfile` by changing the current version to the new obtained
+# version from the Atlassian JIRA version feed.
+sed --in-place "s/${CURRENT_VERSION}/${APP_VERSION}/g" Dockerfile
+sed --in-place "s|https://www.atlassian.com/software/jira/downloads/binary/atlassian-servicedesk.*.tar.gz|${URL}|g" Dockerfile
+
+echo "Ready for acceptance testing"
