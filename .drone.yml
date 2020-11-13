@@ -1,0 +1,46 @@
+---
+kind: pipeline
+name: default
+type: kubernetes
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: build-image
+  image: docker:dind
+  commands:
+  # wait for docker service to be up before running docker build
+  - n=0; while [ "$n" -lt 60 ] && [ ! -e /var/run/docker.sock ]; do n=$(( n + 1 )); sleep 1; done
+  - docker build -t quay.io/ukhomeofficedigital/jira-service-desk:$${DRONE_COMMIT_SHA} .
+  volumes:
+  - name: dockersock
+    path: /var/run
+  when:
+    event: push
+
+- name: publish-tag
+  image: plugins/docker
+  settings:
+    registry: quay.io
+    repo: quay.io/ukhomeofficedigital/jira-service-desk
+    tags: ${DRONE_TAG}
+  environment:
+    DOCKER_USERNAME: ukhomeofficedigital+jsd
+    DOCKER_PASSWORD:
+      from_secret: DOCKER_PASSWORD
+  when:
+    event:
+    - tag
+
+services:
+- name: docker
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
