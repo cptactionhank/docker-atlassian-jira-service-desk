@@ -32,8 +32,14 @@ RUN set -x \
     && echo -e                 "\njira.home=$JIRA_HOME" >> "${JIRA_INSTALL}/atlassian-jira/WEB-INF/classes/jira-application.properties" \
     && touch -d "@0"           "${JIRA_INSTALL}/conf/server.xml"
 
+RUN wget https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem \
+      -O /usr/local/share/ca-certificates/rds-combined-ca-bundle.pem && \
+    update-ca-certificates
+
 # Reference the UID for the jira user.
 USER 1000
+
+ADD --chown=jira:jira config/jira-config.properties /var/atlassian/
 
 # Expose default HTTP connector port.
 EXPOSE 8080
