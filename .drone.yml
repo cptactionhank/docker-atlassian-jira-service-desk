@@ -12,10 +12,23 @@ steps:
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
   commands:
   # wait for docker service to be up before running docker build
-  - n=0; while [ "$n" -lt 60 ] && [ ! -e /var/run/docker.sock ]; do n=$(( n + 1 )); sleep 1; done
+  - n=0; while [ "$n" -lt 60 ] && [ ! $(docker stats --no-stream) ]; do n=$(( n + 1 )); sleep 1; done
   - docker build -t quay.io/ukhomeofficedigital/jira-service-desk:$${DRONE_COMMIT_SHA} .
   when:
     event: push
+
+- name: scan-image
+  image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
+  pull: always
+  environment:
+    IMAGE_NAME: quay.io/ukhomeofficedigital/jira-service-desk:${DRONE_COMMIT_SHA}
+    TOLERATE: medium
+    FAIL_ON_DETECTION: false
+  depends_on:
+    - build-image
+  when:
+    event:
+    - push
 
 - name: publish-tag
   image: plugins/docker
@@ -34,3 +47,9 @@ steps:
 services:
 - name: docker
   image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/dind
+
+- name: anchore-submission-server
+  image: 340268328991.dkr.ecr.eu-west-2.amazonaws.com/acp/anchore-submission:latest
+  pull: always
+  commands:
+    - /run.sh server
