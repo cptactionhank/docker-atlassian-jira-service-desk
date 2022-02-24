@@ -48,6 +48,11 @@ workflows:
   commit:
     jobs:
       - test-building-container
+      - build-and-update:
+          filters:
+            branches:
+              only:
+                - master
 
   nightly:
     triggers:
