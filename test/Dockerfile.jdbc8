@@ -1,0 +1,13 @@
+FROM quay.io/ukhomeofficedigital/jira-service-desk@sha256:4d20bc5c04eb355700f85c9ed00e43d7b8606278e3e20e7bb9f09a91bd2ab892
+
+USER 0
+
+RUN curl --fail --show-error --location \
+      --output /tmp/mysql-connector-j-8.0.33.jar \
+      https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar \
+    && jar tf /tmp/mysql-connector-j-8.0.33.jar | grep -Fx 'com/mysql/cj/jdbc/Driver.class' \
+    && rm -f "${JIRA_INSTALL}"/lib/mysql-connector-*.jar \
+    && mv /tmp/mysql-connector-j-8.0.33.jar "${JIRA_INSTALL}/lib/" \
+    && chmod 644 "${JIRA_INSTALL}/lib/mysql-connector-j-8.0.33.jar"
+
+USER 1000
